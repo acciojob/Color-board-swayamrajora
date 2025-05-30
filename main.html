@@ -1,16 +1,66 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Board</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(40, 20px);
+      grid-template-rows: repeat(20, 20px);
+      gap: 2px;
+    }
+
+    .square {
+      width: 20px;
+      height: 20px;
+      background-color: #1d1d1d;
+      transition: background-color 1s ease;
+    }
+  </style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
-  <div class="container" id="container"></div>
-</body>
+  <div class="container" id="board"></div>
 
+  <script>
+    const board = document.getElementById('board');
+    const colors = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71'];
+
+    for (let i = 0; i < 800; i++) {
+      const square = document.createElement('div');
+      square.classList.add('square');
+
+      square.addEventListener('mouseover', () => {
+        const color = getRandomColor();
+        square.style.backgroundColor = color;
+      });
+
+      square.addEventListener('mouseout', () => {
+        setTimeout(() => {
+          square.style.backgroundColor = '#1d1d1d';
+        }, 1000);
+      });
+
+      board.appendChild(square);
+    }
+
+    function getRandomColor() {
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+  </script>
+</body>
 </html>
